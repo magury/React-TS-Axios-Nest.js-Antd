@@ -5,8 +5,8 @@ import type { UploadProps } from 'antd';
 import { headerStyle, contentStyle, siderStyle, footerStyle, layoutStyle, tag, avatar, flex, menu, } from "./css";
 import { AppstoreOutlined, CalendarOutlined, LinkOutlined, MailOutlined, SettingOutlined, UserOutlined, InboxOutlined } from "@ant-design/icons";
 import type { MenuProps, MenuTheme } from "antd/es/menu";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { setAvatar } from "../../features/login/loginSlice";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { setAvatar } from "@/features/login/loginSlice";
 type MenuItem = Required<MenuProps>["items"][number];
 const { Header, Footer, Sider, Content } = Layout;
 const getItem = (label: React.ReactNode, key?: React.Key | null, icon?: React.ReactNode, children?: MenuItem[]): MenuItem =>

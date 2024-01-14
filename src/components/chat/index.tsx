@@ -1,10 +1,6 @@
 import React, { Fragment } from "react";
 import { Layout, Flex, Input, Card, Image } from "antd";
-import {
-  SearchOutlined,
-  BgColorsOutlined,
-  SlackSquareOutlined,
-} from "@ant-design/icons";
+import { SearchOutlined, BgColorsOutlined, SlackSquareOutlined, } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import Pop from "./pop";
 const { Header, Footer, Sider, Content } = Layout;

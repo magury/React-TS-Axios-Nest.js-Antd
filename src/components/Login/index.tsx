@@ -1,10 +1,9 @@
 import React, { Fragment, useEffect, useRef } from "react";
 import { Button, Card, Checkbox, Form, Input, Space } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { http } from "../../utils/http";
+import { http } from "@/utils/http";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../store/hooks";
-import { setAvatar, setUser } from "../../features/login/loginSlice";
+import { setAvatar, setUser } from "@/features/login/loginSlice";
 import { useDispatch } from "react-redux";
 const App: React.FC = () => {
   const dispatch = useDispatch()

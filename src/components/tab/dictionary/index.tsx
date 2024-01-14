@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import type { TableColumnsType } from "antd";
 import { Badge, Dropdown, Space, Table } from "antd";
-import { http } from "../../../utils/http";
+import { http } from "@/utils/http";
 // 二级数据源
 const App: React.FC = () => {
   // 一级数据源

@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Space, Table, Tag, Input } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Search from "./search";
-import { http } from "../../../utils/http";
+import { http } from "@/utils/http";
 const columns: ColumnsType<badDataType> = [
   {
     title: "患者姓名",
