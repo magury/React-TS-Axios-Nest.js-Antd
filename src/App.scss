@@ -248,3 +248,11 @@
     }
   }
 }
+.a_color {
+  color: #1677ff;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+    color: #69b1ff;
+  }
+}

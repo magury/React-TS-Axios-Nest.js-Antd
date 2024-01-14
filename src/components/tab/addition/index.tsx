@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Space, Table, Tag, Input, Popconfirm } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { addDataType } from "../../../utils/type";
 import Search from "./search";
 const App: React.FC = () => {
   const [data, setData] = useState<Array<addDataType>>([
@@ -9,18 +8,18 @@ const App: React.FC = () => {
       key: "1",
       id: new Date().getTime().toString(),
       customer: "郑飞狗",
-      name: "乐山市第一人民医院",
+      hospitalName: "乐山市第一人民医院",
       departmentName: "外科",
-      time: new Date().toLocaleString(),
+      createdDate: new Date().toLocaleString(),
       tags: ["感冒", "流鼻涕"],
     },
     {
       key: "2",
       id: new Date().getTime().toString(),
       customer: "郑飞狗",
-      name: "乐山市第二人民医院",
+      hospitalName: "乐山市第二人民医院",
       departmentName: "外科",
-      time: new Date().toLocaleString(),
+      createdDate: new Date().toLocaleString(),
       tags: ["感冒", "流鼻涕"],
     },
   ]);
@@ -41,8 +40,8 @@ const App: React.FC = () => {
     },
     {
       title: "医院名称",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "hospitalName",
+      key: "hospitalName",
     },
     {
       title: "科室",
@@ -51,8 +50,8 @@ const App: React.FC = () => {
     },
     {
       title: "创建时间",
-      dataIndex: "time",
-      key: "time",
+      dataIndex: "createdDate",
+      key: "createdDate",
     },
     {
       title: "病情",
@@ -93,26 +92,6 @@ const App: React.FC = () => {
     },
   ];
 
-  const data1: addDataType[] = [
-    {
-      key: "1",
-      id: new Date().getTime().toString(),
-      customer: "郑飞狗",
-      name: "乐山市第一人民医院",
-      departmentName: "外科",
-      time: new Date().toLocaleString(),
-      tags: ["感冒", "流鼻涕"],
-    },
-    {
-      key: "2",
-      id: new Date().getTime().toString(),
-      customer: "郑飞狗",
-      name: "乐山市第二人民医院",
-      departmentName: "外科",
-      time: new Date().toLocaleString(),
-      tags: ["感冒", "流鼻涕"],
-    },
-  ];
 
   return (
     <Fragment>

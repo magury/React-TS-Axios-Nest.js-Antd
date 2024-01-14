@@ -1,79 +1,86 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import type { TableColumnsType } from "antd";
-import { Badge, Space, Table } from "antd";
-import { dictionaryDataType, ExpandedDataType } from "../../../utils/type";
-
+import { Badge, Dropdown, Space, Table } from "antd";
+import { http } from "../../../utils/http";
+// 二级数据源
 const App: React.FC = () => {
-  // 二阶数据
-  let exData: any[] | undefined = [];
+  // 一级数据源
+  const [content, setContent] = useState<dictionaryDataType[]>();
+  // 二级数据
+  const [children, setChild] = useState();
+  const child: any = [];
   useEffect(() => {
-    exData = [
-      {
-        key: new Date().getTime().toString(),
-        id: new Date().getTime().toString(),
-        name: "乐山市第一人民医院",
-        level: "三甲",
-        time: new Date().toLocaleString(),
-      },
-    ];
+    http.get("/hospital/list").then((res) => {
+      const data: Array<ProvinceData> = res.data;
+      const provinces: any = [];
+      for (const it of data) {
+        const province: any = { ...it };
+        provinces.push(province);
+        delete province.children;
+        child.push(it.children);
+      }
+      setContent(provinces);
+      setChild(child);
+    });
   }, []);
 
-  // 触发回调
-  const onExpandedRowsChange = (expandedRows: readonly React.Key[]) => {
-    // 二阶数据
-    exData = [
-      {
-        key: new Date().getTime().toString(),
-        id: new Date().getTime().toString(),
-        name: "乐山市第二人民医院",
-        level: "三甲",
-        time: new Date().toLocaleString(),
-      },
-    ];
-  };
-  const expandedRowRender = () => {
+  const expandedRowRender = (
+    record: any,
+    index: number,
+    indent: any,
+    expanded: any
+  ) => {
     const columns: TableColumnsType<ExpandedDataType> = [
-      { title: "序号", dataIndex: "id", key: "id" },
-      { title: "医院名称", dataIndex: "name", key: "name" },
+      { title: "医院名称", dataIndex: "hospitalName" },
+      { title: "添加的时间", dataIndex: "additionDate" },
+      { title: "医院水平", dataIndex: "hospitalLevel" },
       {
-        title: "Status",
-        key: "state",
-        render: () => <Badge status="success" text="三甲" />,
+        title: "地址",
+        dataIndex: "position",
       },
-      { title: "创建时间", dataIndex: "time", key: "time" },
     ];
-    return <Table columns={columns} dataSource={exData} pagination={false} />;
+
+    const data = [];
+    for (let i = 0; i < 3; ++i) {
+      data.push({
+        key: i.toString(),
+        hospitalName: "111",
+        additionDate: "sss",
+        hospitalLevel: "sss",
+        province: "sss",
+      });
+    }
+
+    return (
+      <Table
+        columns={columns}
+        dataSource={children![index]}
+        pagination={false}
+        rowKey={(record) => Date.now() + Math.random() * 100 + ""}
+      />
+    );
   };
 
-  const columns: TableColumnsType<dictionaryDataType> = [
-    { title: "省份", dataIndex: "sort", key: "sort" },
-    { title: "编码", dataIndex: "code", key: "code" },
-    { title: "医院数量", dataIndex: "level", key: "level" },
-    { title: "医生人数", dataIndex: "doctorNumber", key: "doctorNumber" },
+  const columns: TableColumnsType<DataType> = [
+    { title: "省份", dataIndex: "provinceName" },
+    { title: "邮政编码", dataIndex: "code" },
+    { title: "医生数量", dataIndex: "doctorNumber" },
+    { title: "医院数量", dataIndex: "mount" },
   ];
 
-  const data: dictionaryDataType[] = [];
-  data.push({
-    key: new Date().toString(),
-    sort: "四川省",
-    code: "110011",
-    level: 20,
-    doctorNumber: 20,
-  });
-
   return (
-    <Fragment>
+    <>
       <Table
+        rowKey={(record) => record.provinceName}
         pagination={false}
         columns={columns}
         expandable={{
           expandedRowRender,
           defaultExpandedRowKeys: ["0"],
-          onExpandedRowsChange,
         }}
-        dataSource={data}
+        dataSource={content}
       />
-    </Fragment>
+    </>
   );
 };
 

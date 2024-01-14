@@ -1,6 +1,4 @@
-import {
-  Navigate
-} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import Login from '../components/Login/index'
 import Patient from '../components/patientInfo/index'
 import Customer from '../components/tab/customer'
@@ -24,7 +22,7 @@ export default  [
   },
   {
     path: '/',
-    element: <Navigate to='/detail' />,
+    element: <Navigate to='/patient' />,
   },
   {
      path: '/chat',

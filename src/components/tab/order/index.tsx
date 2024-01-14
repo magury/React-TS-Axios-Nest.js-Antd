@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Space, Table, Tag, Input } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { orderDataType } from "../../../utils/type";
 import Search from "./search";
 const columns: ColumnsType<orderDataType> = [
   {
@@ -20,8 +19,8 @@ const columns: ColumnsType<orderDataType> = [
   },
   {
     title: "医院名称",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "hospitalName",
+    key: "hospitalName",
     className: "text",
     align: "center",
   },
@@ -76,8 +75,8 @@ const columns: ColumnsType<orderDataType> = [
   },
   {
     title: "创建时间",
-    dataIndex: "time",
-    key: "time",
+    dataIndex: "createdDate",
+    key: "createdDate",
     className: "text",
     align: "center",
   },
@@ -88,7 +87,7 @@ const data: orderDataType[] = [
     key: "1",
     id: "1",
     order: "string",
-    name: "乐山市第一人民医院",
+    hospitalName: "乐山市第一人民医院",
     departmentName: "外科",
     position: "教授",
     scheduleTime: new Date().toLocaleString(),
@@ -96,7 +95,7 @@ const data: orderDataType[] = [
     number: 12,
     fee: 100,
     station: "OK",
-    time: new Date().toLocaleString(),
+    createdDate: new Date().toLocaleString(),
   },
 ];
 

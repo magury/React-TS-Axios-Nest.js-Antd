@@ -286,3 +286,13 @@
 .experience > .item > .flex > .text > div {
   height: 100%;
 }
+
+.a_color {
+  color: #1677ff;
+  text-decoration: none;
+}
+
+.a_color:hover {
+  text-decoration: none;
+  color: #69b1ff;
+}

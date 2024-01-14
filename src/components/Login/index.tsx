@@ -1,10 +1,55 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useRef } from "react";
 import { Button, Card, Checkbox, Form, Input, Space } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { http } from "../../utils/http";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../store/hooks";
+import { setAvatar, setUser } from "../../features/login/loginSlice";
+import { useDispatch } from "react-redux";
 const App: React.FC = () => {
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-  };
+  const dispatch = useDispatch()
+  // 导航
+  const navigate = useNavigate();
+  const user: any = useRef(null);
+  const password: any = useRef(null);
+  const onFinish = (values: any) => { };
+  async function login() {
+    const param = {
+      username: user.current.input.value,
+      password: password.current.input.value,
+    }
+    if (
+      param.username.trim() == "" ||
+      param.password.trim() == ""
+    )
+      return undefined;
+    const res = await http.request({
+      url: "/login",
+      params: {
+        username: user.current.input.value,
+        password: password.current.input.value,
+      },
+    });
+    if (res.data.code == 200) {
+      dispatch(setUser({ ...param }))
+      dispatch(setAvatar(res.data.data.url))
+      navigate("/patient");
+    }
+  }
+  function register() {
+    if (
+      user.current.input.value.trim() == "" ||
+      password.current.input.value == ""
+    )
+      return undefined;
+    http.request({
+      url: "/register",
+      params: {
+        username: user.current.input.value,
+        password: password.current.input.value,
+      },
+    });
+  }
   return (
     <Fragment>
       <div className="bg">
@@ -34,6 +79,7 @@ const App: React.FC = () => {
                 ]}
               >
                 <Input
+                  ref={user}
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   placeholder="Username"
                 />
@@ -45,6 +91,7 @@ const App: React.FC = () => {
                 ]}
               >
                 <Input
+                  ref={password}
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Password"
@@ -65,10 +112,14 @@ const App: React.FC = () => {
                   type="primary"
                   htmlType="submit"
                   className="login-form-button"
+                  onClick={login}
                 >
                   Log in
                 </Button>
-                Or <a href="">register now!</a>
+                Or
+                <a href="javascript: void(0)" onClick={register}>
+                  register now!
+                </a>
               </Form.Item>
             </Form>
           </Card>

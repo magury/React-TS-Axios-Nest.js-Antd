@@ -1,8 +1,8 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Space, Table, Tag, Input } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { badDataType } from "../../../utils/type";
 import Search from "./search";
+import { http } from "../../../utils/http";
 const columns: ColumnsType<badDataType> = [
   {
     title: "患者姓名",
@@ -11,23 +11,23 @@ const columns: ColumnsType<badDataType> = [
   },
   {
     title: "医院名称",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "hospitalName",
+    key: "hospitalName",
   },
   {
     title: "医院级别",
-    dataIndex: "level",
-    key: "level",
+    dataIndex: "hospitalLevel",
+    key: "hospitalLevel",
   },
   {
     title: "医院地址",
-    dataIndex: "address",
-    key: "address",
+    dataIndex: "hospitalAddress",
+    key: "hospitalAddress",
   },
   {
     title: "创建时间",
-    dataIndex: "time",
-    key: "time",
+    dataIndex: "createdDate",
+    key: "createdDate",
   },
   {
     title: "不良原因",
@@ -57,23 +57,37 @@ const columns: ColumnsType<badDataType> = [
   },
 ];
 
-const data: badDataType[] = [
-  {
-    key: "1",
-    customer: "郑飞狗",
-    name: "乐山市第一人民医院",
-    level: "三甲医院",
-    address: "四川省乐山市市中区白塔街238号",
-    time: new Date().toLocaleString(),
-    reason: "不支付医药费",
-    tags: ["感冒", "流鼻涕"],
-  },
-];
-
 const App: React.FC = () => {
+  const getList = async (params: any) => {
+    const res: Info[] = await await (
+      await http.request({
+        url: "/bad/list",
+        method: "get",
+        params,
+      })
+    ).data;
+    let arr: badDataType[] = [];
+    res.map((item, index) => {
+      arr = [
+        ...arr,
+        {
+          key: String(item.customerId),
+          customer: item.customer,
+          hospitalName: item.hospitalName,
+          hospitalLevel: item.hospitalLevel,
+          hospitalAddress: item.hospitalAddress,
+          createdDate: item.createdDate,
+          reason: item.cause,
+          tags: JSON.parse(item.tags),
+        },
+      ];
+    });
+    setData(arr);
+  };
+  const [data, setData] = useState<badDataType[]>([]);
   return (
     <Fragment>
-      <Search />
+      <Search getList={getList} />
       <Table
         pagination={false}
         columns={columns}

@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Table, Tag, Input, Popconfirm, Drawer } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { lookDataType } from "../../../utils/type";
 import Search from "./search";
 const App: React.FC = () => {
   // 框
@@ -18,17 +17,17 @@ const App: React.FC = () => {
     {
       key: "1",
       customer: "郑飞狗",
-      name: "乐山市第一人民医院",
+      hospitalName: "乐山市第一人民医院",
       departmentName: "外科",
-      time: new Date().toLocaleString(),
+      createdDate: new Date().toLocaleString(),
       tags: ["CT", "抽血"],
     },
     {
       key: "2",
       customer: "郑飞狗",
-      name: "乐山市第二人民医院",
+      hospitalName: "乐山市第二人民医院",
       departmentName: "外科",
-      time: new Date().toLocaleString(),
+      createdDate: new Date().toLocaleString(),
       tags: ["CT", "抽血"],
     },
   ]);
@@ -40,8 +39,8 @@ const App: React.FC = () => {
     },
     {
       title: "医院名称",
-      dataIndex: "name",
-      key: "name",
+      dataIndex: "hospitalName",
+      key: "hospitalName",
     },
     {
       title: "科室",
@@ -50,8 +49,8 @@ const App: React.FC = () => {
     },
     {
       title: "创建时间",
-      dataIndex: "time",
-      key: "time",
+      dataIndex: "createdDate",
+      key: "createdDate",
     },
     {
       title: "检查类别",
@@ -90,17 +89,17 @@ const App: React.FC = () => {
     {
       key: "1",
       customer: "郑飞狗",
-      name: "乐山市第一人民医院",
+      hospitalName: "乐山市第一人民医院",
       departmentName: "外科",
-      time: new Date().toLocaleString(),
+      createdDate: new Date().toLocaleString(),
       tags: ["感冒", "流鼻涕"],
     },
     {
       key: "2",
       customer: "郑飞狗",
-      name: "乐山市第二人民医院",
+      hospitalName: "乐山市第二人民医院",
       departmentName: "外科",
-      time: new Date().toLocaleString(),
+      createdDate: new Date().toLocaleString(),
       tags: ["CT", "抽血"],
     },
   ];

@@ -1,11 +1,23 @@
 import { Input, Button, Flex, Tooltip } from "antd";
 import React, { Fragment, useRef } from "react";
 import { SearchOutlined, CloseOutlined } from "@ant-design/icons";
-const App: React.FC = () => {
+interface IProps {
+  getList: Function;
+}
+const App: React.FC<IProps> = (props) => {
   const hospital = useRef<any>(null);
   const name = useRef<any>(null);
   const id = useRef<any>(null);
-  const query = (): void => {};
+  const query = (): void => {
+    const param = {
+      hospital: hospital.current.input.value,
+      id: id.current.input.value,
+      name: name.current.input.value,
+    };
+
+    if (!(param.hospital == param.id && param.id == param.name))
+      props.getList(param);
+  };
   const clean = (): void => {
     // 清除查询信息
     hospital.current.input.value =
