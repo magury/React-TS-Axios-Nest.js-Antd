@@ -32,13 +32,6 @@ const columns: ColumnsType<orderDataType> = [
     align: "center",
   },
   {
-    title: "医生职称",
-    dataIndex: "position",
-    key: "position",
-    className: "text",
-    align: "center",
-  },
-  {
     title: "安排时间",
     dataIndex: "scheduleTime",
     key: "scheduleTime",
@@ -89,7 +82,6 @@ const data: orderDataType[] = [
     order: "string",
     hospitalName: "乐山市第一人民医院",
     departmentName: "外科",
-    position: "教授",
     scheduleTime: new Date().toLocaleString(),
     customer: "郑飞狗",
     number: 12,

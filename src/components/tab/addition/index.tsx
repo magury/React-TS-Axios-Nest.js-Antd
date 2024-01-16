@@ -1,32 +1,30 @@
 import React, { Fragment, useState } from "react";
-import { Space, Table, Tag, Input, Popconfirm } from "antd";
+import { Table, Tag, Input, Popconfirm } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Search from "./search";
+import { deleteUser, http } from "@/utils/http";
+import useMessage from "antd/es/message/useMessage";
+interface Result<T> {
+  status: number,
+  message: string,
+  result: T
+}
 const App: React.FC = () => {
-  const [data, setData] = useState<Array<addDataType>>([
-    {
-      key: "1",
-      id: new Date().getTime().toString(),
-      customer: "郑飞狗",
-      hospitalName: "乐山市第一人民医院",
-      departmentName: "外科",
-      createdDate: new Date().toLocaleString(),
-      tags: ["感冒", "流鼻涕"],
-    },
-    {
-      key: "2",
-      id: new Date().getTime().toString(),
-      customer: "郑飞狗",
-      hospitalName: "乐山市第二人民医院",
-      departmentName: "外科",
-      createdDate: new Date().toLocaleString(),
-      tags: ["感冒", "流鼻涕"],
-    },
-  ]);
-  const handleDelete = (key: React.Key) => {
+  // 对话框
+  const [messageApi, contextHolder] = useMessage()
+  const [data, setData] = useState<Array<addDataType>>([]);
+  const handleDelete = async (key: React.Key) => {
     const newData = data.filter((item) => item.key !== key);
     setData(newData);
+    const res = await deleteUser({ customerId: key })
+    if (res.status == 200 && res.result.affectedRows == 1)
+      messageApi.success({
+        content: res.message,
+        duration: 3
+      })
+
   };
+  /** 字段类型 */
   const columns: ColumnsType<addDataType> = [
     {
       title: "序号",
@@ -61,14 +59,8 @@ const App: React.FC = () => {
         <>
           {tags.map((tag) => {
             let color = tag.length > 5 ? "geekblue" : "green";
-            if (tag === "loser") {
-              color = "volcano";
-            }
-            return (
-              <Tag color={color} key={tag}>
-                {tag.toUpperCase()}
-              </Tag>
-            );
+            if (tag === "loser") color = "volcano";
+            return (<Tag color={color} key={tag}>{tag.toUpperCase()} </Tag>);
           })}
         </>
       ),
@@ -77,7 +69,6 @@ const App: React.FC = () => {
       title: "operation",
       dataIndex: "operation",
       render: (_, record: addDataType) => {
-        console.log(record);
         return data.length >= 1 ? (
           <Popconfirm
             title="Sure to delete?"
@@ -91,11 +82,28 @@ const App: React.FC = () => {
       },
     },
   ];
+  /**
+   * @description  更新字段函数
+   * @param result 字段信息
+   *  */
+  const getList = ({ result }: Result<Info[]>) => {
+    const res: addDataType[] = []
 
+    result.map((item, index) => {
+      const tags = JSON.parse(item.tags)
+      res.push({
+        key: item.customerId, id: index.toString(), customer: item.customer, hospitalName: item.hospitalName,
+        depart: item.depart, createdDate: item.createdDate, tags
+      })
+    })
+    setData(res)
+
+  }
 
   return (
     <Fragment>
-      <Search />
+      <Search getList={getList} />
+      {contextHolder}
       <Table
         pagination={false}
         columns={columns}

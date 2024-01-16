@@ -16,7 +16,7 @@ const App: React.FC = () => {
   const [show, setShow] = useState(false)
   // 事件触发器
   const dispatch = useAppDispatch()
-  const avatarUrl = useAppSelector(state => state.login.avatar)
+  const picturePath = useAppSelector(state => state.login.status.picturePath)
   const user = { ...useAppSelector(state => state.login) }
   // 上传文件
   const props: UploadProps = {
@@ -35,12 +35,13 @@ const App: React.FC = () => {
       if (status === 'done') {
         // 上传到服务器了
         const { response } = info.file
-        if (response.code == 200) {
+        console.log(response);
+
+        if (response.status == 200) {
           message.success(`${info.file.name} file uploaded successfully.`);
-          dispatch(setAvatar(response.data.url))
+          dispatch(setAvatar(response.result.url))
           // 设置头像
         }
-        console.log(response);
 
 
       } else if (status === 'error') {
@@ -216,7 +217,7 @@ const App: React.FC = () => {
                 <Avatar
                   onClick={showModal}
                   style={{ cursor: 'pointer' }}
-                  src={avatarUrl}
+                  src={picturePath}
                   shape="square"
                   size="large"
                   icon={<UserOutlined />}

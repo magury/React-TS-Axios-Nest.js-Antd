@@ -58,7 +58,7 @@ declare interface addDataType {
   /**医院名称 */
   hospitalName: string;
   /**科室 */
-  departmentName: string;
+  depart: string;
   /**创建时间 */
   createdDate: string;
   /**病情 */
@@ -83,9 +83,9 @@ declare interface listDataType {
   /** 医院名称 */
   hospitalName: string;
   /** 科室 */
-  departmentName: string;
+  depart: string;
   /** 创建时间 */
-  createdDate: string;
+  createdDate: Date;
   /** 检查类别 */
   tags: Array<string>;
 }
@@ -93,9 +93,10 @@ declare interface listDataType {
  * @param key: 唯一标识;
  * @param  customer: 患者名称
  * @param  hospitalName: 医院名称
- * @param  departmentName: 科室
+ * @param  depart: 科室
  * @param  createdDate:创建时间
  * @param  tags: 检查类别
+ * @param reportPath 报告路径
  */
 declare interface lookDataType {
   /** 唯一标识 */
@@ -105,11 +106,13 @@ declare interface lookDataType {
   /** 医院名称 */
   hospitalName: string;
   /** 科室 */
-  departmentName: string;
+  depart: string;
   /** 创建时间 */
   createdDate: string;
   /** 检查类别 */
   tags: Array<string>;
+  /** 报告路径 */
+  reportPath: string;
 }
 /**
  * @param hospitalName: 医院名称;
@@ -161,7 +164,6 @@ declare interface ProvinceData {
  * @param order 订单号
  * @param hospitalName 医院名称
  * @param departmentName 科室名称
- * @param position 医生职称
  * @param scheduleTime 安排时间
  * @param customer 患者姓名
  * @param number 预约号
@@ -180,8 +182,6 @@ declare interface orderDataType {
   hospitalName: string;
   /** 科室名称 */
   departmentName: string;
-  /** 医生职称 */
-  position: string;
   /** 安排时间 */
   scheduleTime: string;
   /** 患者姓名 */
@@ -207,6 +207,8 @@ interface common {
   hospitalAddress?: string;
   /** 就诊时间 */
   createdDate: string;
+  /** 处方药 */
+  prescriptionDrug?: string;
 }
 /**
  * @description 患者信息页面
@@ -227,8 +229,6 @@ declare interface DataType extends common {
   tags: string[];
   /** 就诊次数 */
   times: number;
-  /** 处方药 */
-  prescriptionDrug?: string;
 }
 /**
  * @description 数据库类型
@@ -257,8 +257,6 @@ declare interface Info extends common {
   province: string;
   /** 就诊次数 */
   times: number;
-  /** 处方药 */
-  prescriptionDrug: string;
 }
 /**
  * @param key 唯一标识
@@ -268,13 +266,14 @@ declare interface Info extends common {
  * @param hospitalAddress 医院地址
  * @param tags 患病标签
  * @param createdDate 就诊时间
- * @param reason 患病原因
+ * @param cause 不良原因
+ * @param prescriptionDrug 处方药
  */
 declare interface badDataType extends common {
   /** 唯一标识 */
   key: string;
   /** 患病标签 */
   tags: string[];
-  /** 患病原因 */
-  reason: string;
+  /** 不良原因 */
+  cause: string;
 }

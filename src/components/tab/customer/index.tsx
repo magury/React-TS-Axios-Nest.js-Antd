@@ -3,36 +3,11 @@ import { Space, Table, Tag, Input, Button, Modal } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Search from "./search";
 import { http } from "@/utils/http";
-const info = () => {
-  Modal.info({
-    title: 'This is a notification message',
-    content: (
-      <div>
-        <p>some messages...some messages...</p>
-        <p>some messages...some messages...</p>
-      </div>
-    ),
-    onOk() { },
-  });
-};
-
-const success = () => {
+const success = (record: DataType) => {
   Modal.success({
-    content: 'some messages...some messages...',
-  });
-};
-
-const error = () => {
-  Modal.error({
-    title: 'This is an error message',
-    content: 'some messages...some messages...',
-  });
-};
-
-const warning = () => {
-  Modal.warning({
-    title: 'This is a warning message',
-    content: 'some messages...some messages...',
+    title: '售出信息',
+    content: record.prescriptionDrug,
+    okText: '知道了'
   });
 };
 const columns: ColumnsType<DataType> = [
@@ -94,15 +69,14 @@ const columns: ColumnsType<DataType> = [
     title: 'Action',
     key: 'action', align: 'center',
     render: (_, record) => (
-      <Space size="middle" onClick={() => {
-        console.log(record);
-      }}>
+      <Space size="middle" onClick={() => success(record)}>
         <a className="a_color">查看用药信息</a>
       </Space >
     ),
   },
 ];
 const App: React.FC = () => {
+
   const [data, setData] = useState<DataType[]>([]);
   const getInfo = async (params: any) => {
     const res: Info[] = await (await http.request({ url: "/info", method: "get", params, })).data;
@@ -113,13 +87,8 @@ const App: React.FC = () => {
       arr = [
         ...arr,
         {
+          ...item,
           key: String(item.customerId),
-          customer: item.customer,
-          hospitalName: item.hospitalName,
-          hospitalLevel: item.hospitalLevel,
-          hospitalAddress: item.hospitalAddress,
-          createdDate: item.createdDate,
-          times: item.times,
           tags: JSON.parse(item.tags),
         },
       ];
@@ -129,12 +98,6 @@ const App: React.FC = () => {
 
   return (
     <Fragment>
-      <Space wrap>
-        <Button onClick={info}>Info</Button>
-        <Button onClick={success}>Success</Button>
-        <Button onClick={error}>Error</Button>
-        <Button onClick={warning}>Warning</Button>
-      </Space>
       <Search getInfo={getInfo} />
       <Table
         rowKey={(record) => record.customer + record.hospitalName}

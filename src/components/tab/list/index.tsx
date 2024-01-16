@@ -2,29 +2,22 @@ import React, { Fragment, useState } from "react";
 import { Space, Table, Tag, Input, Popconfirm } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Search from "./search";
+import { deleteReport } from "@/utils/http";
+import useMessage from "antd/es/message/useMessage";
 const App: React.FC = () => {
-  const [data, setData] = useState<Array<listDataType>>([
-    {
-      key: "1",
-      orderId: new Date().getTime().toString(),
-      customer: "郑飞狗",
-      hospitalName: "乐山市第一人民医院",
-      departmentName: "外科",
-      createdDate: new Date().toLocaleString(),
-      tags: ["CT", "抽血"],
-    },
-    {
-      key: "2",
-      orderId: new Date().getTime().toString(),
-      customer: "郑飞狗",
-      hospitalName: "乐山市第二人民医院",
-      departmentName: "外科",
-      createdDate: new Date().toLocaleString(),
-      tags: ["CT", "抽血"],
-    },
-  ]);
-  const handleDelete = (key: React.Key) => {
+  const [messageApi, contextHolder] = useMessage()
+  const getList = (list: any[]) => {
+    list.map((item) => {
+      item.key = item.customerId
+      delete item.reportPath
+    })
+    setData(list)
+  }
+  const [data, setData] = useState<Array<listDataType>>([]);
+  const handleDelete = async (key: React.Key) => {
     const newData = data.filter((item) => item.key !== key);
+    const result = await deleteReport(key)
+    messageApi.success(result.message)
     setData(newData);
   };
   const columns: ColumnsType<listDataType> = [
@@ -45,8 +38,8 @@ const App: React.FC = () => {
     },
     {
       title: "科室",
-      dataIndex: "departmentName",
-      key: "departmentName",
+      dataIndex: "depart",
+      key: "depart",
     },
     {
       title: "创建时间",
@@ -90,31 +83,10 @@ const App: React.FC = () => {
       },
     },
   ];
-
-  const data1: listDataType[] = [
-    {
-      key: "1",
-      orderId: new Date().getTime().toString(),
-      customer: "郑飞狗",
-      hospitalName: "乐山市第一人民医院",
-      departmentName: "外科",
-      createdDate: new Date().toLocaleString(),
-      tags: ["感冒", "流鼻涕"],
-    },
-    {
-      key: "2",
-      orderId: new Date().getTime().toString(),
-      customer: "郑飞狗",
-      hospitalName: "乐山市第二人民医院",
-      departmentName: "外科",
-      createdDate: new Date().toLocaleString(),
-      tags: ["CT", "抽血"],
-    },
-  ];
-
   return (
     <Fragment>
-      <Search />
+      <Search getList={getList} />
+      {contextHolder}
       <Table
         pagination={false}
         columns={columns}

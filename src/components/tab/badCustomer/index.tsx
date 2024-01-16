@@ -1,8 +1,15 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Space, Table, Tag, Input } from "antd";
+import { Space, Table, Tag, Input, Modal } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import Search from "./search";
 import { http } from "@/utils/http";
+const success = (record: badDataType) => {
+  Modal.success({
+    title: '售出信息',
+    content: record.prescriptionDrug,
+    okText: '知道了'
+  });
+};
 const columns: ColumnsType<badDataType> = [
   {
     title: "患者姓名",
@@ -31,10 +38,9 @@ const columns: ColumnsType<badDataType> = [
   },
   {
     title: "不良原因",
-    dataIndex: "reason",
-    key: "reason",
+    dataIndex: "cause",
+    key: "cause",
   },
-
   {
     title: "病情",
     key: "tags",
@@ -55,6 +61,15 @@ const columns: ColumnsType<badDataType> = [
       </>
     ),
   },
+  {
+    title: 'Action',
+    key: 'action',
+    render: (_, record) => (
+      <Space size="middle" onClick={() => success(record)}>
+        <a className="a_color">查看用药信息</a>
+      </Space>
+    ),
+  },
 ];
 
 const App: React.FC = () => {
@@ -71,13 +86,8 @@ const App: React.FC = () => {
       arr = [
         ...arr,
         {
+          ...item,
           key: String(item.customerId),
-          customer: item.customer,
-          hospitalName: item.hospitalName,
-          hospitalLevel: item.hospitalLevel,
-          hospitalAddress: item.hospitalAddress,
-          createdDate: item.createdDate,
-          reason: item.cause,
           tags: JSON.parse(item.tags),
         },
       ];
