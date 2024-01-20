@@ -152,7 +152,7 @@ const App: React.FC = () => {
                     placeholder="输入内容"
                 />
             </Modal>
-            <div className="popular">
+            <div>
                 <FloatButton
                     onClick={showModal}
                     badge={{count: badge == 0 ? null : badge}}
@@ -160,8 +160,8 @@ const App: React.FC = () => {
                     type="primary"
                     className='top-[100px] right-[24px]'
                 />
-                <div className="flex">
-                    <div className="myCard  noSelect">
+                <div className="flex flex-row">
+                    <div className="flex flex-row flex-wrap  noSelect">
                         {json!.map((item: any, index) => (
                                 <Card
                                     hoverable
@@ -182,16 +182,18 @@ const App: React.FC = () => {
                                         />
                                     }
                                     actions={[
-                                        <div>
+                                        <div className={'select-none'}>
                                             <DislikeOutlined
                                                 key="setting"
                                                 onClick={() => outlined(item.onlyKey, 2)}
                                             />
-                                            <span>{item.dislike > 0 ? item.dislike : null}</span>
+                                            <span
+                                                className={'text-yellow-800 size-12'}>{item.dislike > 0 ? item.dislike : null}</span>
                                         </div>,
                                         <div>
                                             <LikeOutlined key="edit" onClick={() => outlined(item.onlyKey, 1)}/>
-                                            <span>{item.like > 0 ? item.like : null}</span>
+                                            <span
+                                                className={'text-yellow-800 size-12'}>{item.like > 0 ? item.like : null}</span>
                                         </div>,
                                     ]}
                                 >
@@ -212,9 +214,8 @@ const App: React.FC = () => {
                                         />
                                         <br/>
                                         <span className={'float-left'} children={"作者:" + item.author}/>
-                                        <span className={'float-right'} children={"发布时间:" + item.publicDate} />
+                                        <span className={'float-right'} children={"发布时间:" + item.publicDate}/>
                                     </div>
-
                                 </Card>
                             )
                         )}

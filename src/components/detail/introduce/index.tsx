@@ -18,7 +18,7 @@ const App: React.FC = () => {
         </Title>
         {
             paragraph.map((item, index) => (
-                <Paragraph  editable={false} key={item} children={item} code={true} style={{textAlign: "left"}}/>
+                <Paragraph className={"text-left"} editable={false} key={item} children={item} code={true}/>
             ))
         }
         <Divider/>
