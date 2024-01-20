@@ -6,17 +6,18 @@
  * @param doctorNumber: 医生数量
  */
 declare interface dictionaryDataType {
-  /** 唯一标识 */
-  key: React.Key;
-  /** 省名 */
-  provinceName: string;
-  /** 编码 */
-  code: string;
-  /** 医院数量 */
-  mount: number;
-  /** 医生数量 */
-  doctorNumber: number;
+    /** 唯一标识 */
+    key: React.Key;
+    /** 省名 */
+    provinceName: string;
+    /** 编码 */
+    code: string;
+    /** 医院数量 */
+    mount: number;
+    /** 医生数量 */
+    doctorNumber: number;
 }
+
 /**
  * @param  key: 唯一标识
  * @param  hospitalName: 医院名称
@@ -26,19 +27,20 @@ declare interface dictionaryDataType {
  * @param  hospitalId?: 医院id
  */
 declare interface ExpandedDataType {
-  /** 唯一标识 */
-  key: React.Key;
-  /** 医院名称 */
-  hospitalName: string;
-  /** 添加的时间  */
-  additionDate: string;
-  /** 医院水平  */
-  hospitalLevel: string;
-  /** 省名  */
-  province: string;
-  /** 医院id  */
-  hospitalId?: string;
+    /** 唯一标识 */
+    key: React.Key;
+    /** 医院名称 */
+    hospitalName: string;
+    /** 添加的时间  */
+    additionDate: string;
+    /** 医院水平  */
+    hospitalLevel: string;
+    /** 省名  */
+    province: string;
+    /** 医院id  */
+    hospitalId?: string;
 }
+
 /**
  * @param key 唯一标识
  * @param  id 序号
@@ -49,21 +51,22 @@ declare interface ExpandedDataType {
  * @param  tags 病情
  */
 declare interface addDataType {
-  /** 唯一标识 */
-  key: string;
-  /** 序号 */
-  id: string;
-  /**患者姓名 */
-  customer: string;
-  /**医院名称 */
-  hospitalName: string;
-  /**科室 */
-  depart: string;
-  /**创建时间 */
-  createdDate: string;
-  /**病情 */
-  tags: Array<string>;
+    /** 唯一标识 */
+    key: string;
+    /** 序号 */
+    id: string;
+    /**患者姓名 */
+    customer: string;
+    /**医院名称 */
+    hospitalName: string;
+    /**科室 */
+    depart: string;
+    /**创建时间 */
+    createdDate: string;
+    /**病情 */
+    tags: Array<string>;
 }
+
 /**
  * @param  key: string;
  * @param  orderId: string;
@@ -74,21 +77,22 @@ declare interface addDataType {
  * @param  tags: Array<string>;
  */
 declare interface listDataType {
-  /** 唯一标识 */
-  key: string;
-  /** 订单id */
-  orderId: string;
-  /** 患者姓名 */
-  customer: string;
-  /** 医院名称 */
-  hospitalName: string;
-  /** 科室 */
-  depart: string;
-  /** 创建时间 */
-  createdDate: Date;
-  /** 检查类别 */
-  tags: Array<string>;
+    /** 唯一标识 */
+    key: string;
+    /** 订单id */
+    orderId: string;
+    /** 患者姓名 */
+    customer: string;
+    /** 医院名称 */
+    hospitalName: string;
+    /** 科室 */
+    depart: string;
+    /** 创建时间 */
+    createdDate: Date;
+    /** 检查类别 */
+    tags: Array<string>;
 }
+
 /**
  * @param key: 唯一标识;
  * @param  customer: 患者名称
@@ -99,21 +103,22 @@ declare interface listDataType {
  * @param reportPath 报告路径
  */
 declare interface lookDataType {
-  /** 唯一标识 */
-  key: string;
-  /** 患者名称 */
-  customer: string;
-  /** 医院名称 */
-  hospitalName: string;
-  /** 科室 */
-  depart: string;
-  /** 创建时间 */
-  createdDate: string;
-  /** 检查类别 */
-  tags: Array<string>;
-  /** 报告路径 */
-  reportPath: string;
+    /** 唯一标识 */
+    key: string;
+    /** 患者名称 */
+    customer: string;
+    /** 医院名称 */
+    hospitalName: string;
+    /** 科室 */
+    depart: string;
+    /** 创建时间 */
+    createdDate: string;
+    /** 检查类别 */
+    tags: Array<string>;
+    /** 报告路径 */
+    reportPath: string;
 }
+
 /**
  * @param hospitalName: 医院名称;
  * @param hospitalId: 医院id;
@@ -122,17 +127,18 @@ declare interface lookDataType {
  * @param position: 医院位置;
  */
 declare interface child {
-  /** 医院名称 */
-  hospitalName: string;
-  /** 医院id */
-  hospitalId: string;
-  /** 添加时间 */
-  additionDate: string;
-  /** 医院水平 */
-  hospitalLevel: string;
-  /** 医院位置 */
-  position: string;
+    /** 医院名称 */
+    hospitalName: string;
+    /** 医院id */
+    hospitalId: string;
+    /** 添加时间 */
+    additionDate: string;
+    /** 医院水平 */
+    hospitalLevel: string;
+    /** 医院位置 */
+    position: string;
 }
+
 /**
  * @param provinceName 省名
  * @param code 编码
@@ -140,24 +146,25 @@ declare interface child {
  * @param mount 医院数量
  */
 declare interface ProvinceData {
-  /** 省名 */
-  provinceName: string;
-  /** 编码 */
-  code: string;
-  /** 医生数量 */
-  doctorNumber: number;
-  /** 医院数量 */
-  mount: number;
-  /**
-   * @example
-   * hospitalName 医院名称
-   * hospitalId 医院id
-   * additionDate 添加的时间
-   * hospitalLevel 医院等级
-   * position 地址
-   */
-  children: child[];
+    /** 省名 */
+    provinceName: string;
+    /** 编码 */
+    code: string;
+    /** 医生数量 */
+    doctorNumber: number;
+    /** 医院数量 */
+    mount: number;
+    /**
+     * @example
+     * hospitalName 医院名称
+     * hospitalId 医院id
+     * additionDate 添加的时间
+     * hospitalLevel 医院等级
+     * position 地址
+     */
+    children: child[];
 }
+
 /**
  * @param key 唯一标识
  * @param id 序号
@@ -172,44 +179,45 @@ declare interface ProvinceData {
  * @param createdDate 创建时间
  */
 declare interface orderDataType {
-  /** 唯一标识 */
-  key: string;
-  /** 序号 */
-  id: string;
-  /** 订单号 */
-  order: string;
-  /** 医院名称 */
-  hospitalName: string;
-  /** 科室名称 */
-  departmentName: string;
-  /** 安排时间 */
-  scheduleTime: string;
-  /** 患者姓名 */
-  customer: string;
-  /** 预约号 */
-  number: number;
-  /** 费用 */
-  fee: number;
-  /** 状况 */
-  station: string;
-  /** 创建时间 */
-  createdDate: string;
+    /** 唯一标识 */
+    key: string;
+    /** 序号 */
+    id: string;
+    /** 订单号 */
+    order: string;
+    /** 医院名称 */
+    hospitalName: string;
+    /** 科室名称 */
+    departmentName: string;
+    /** 安排时间 */
+    scheduleTime: string;
+    /** 患者姓名 */
+    customer: string;
+    /** 预约号 */
+    number: number;
+    /** 费用 */
+    fee: number;
+    /** 状况 */
+    station: string;
+    /** 创建时间 */
+    createdDate: string;
 }
 
 interface common {
-  /** 患者姓名 */
-  customer: string;
-  /** 医院名称 */
-  hospitalName: string;
-  /** 医院水平 */
-  hospitalLevel?: string;
-  /** 医院地址 */
-  hospitalAddress?: string;
-  /** 就诊时间 */
-  createdDate: string;
-  /** 处方药 */
-  prescriptionDrug?: string;
+    /** 患者姓名 */
+    customer: string;
+    /** 医院名称 */
+    hospitalName: string;
+    /** 医院水平 */
+    hospitalLevel?: string;
+    /** 医院地址 */
+    hospitalAddress?: string;
+    /** 就诊时间 */
+    createdDate: string;
+    /** 处方药 */
+    prescriptionDrug?: string;
 }
+
 /**
  * @description 患者信息页面
  * @param key 唯一标识
@@ -223,13 +231,14 @@ interface common {
  * @param prescriptionDrug 处方药
  */
 declare interface DataType extends common {
-  /** 唯一标识 */
-  key: string;
-  /** 患病标签 */
-  tags: string[];
-  /** 就诊次数 */
-  times: number;
+    /** 唯一标识 */
+    key: string;
+    /** 患病标签 */
+    tags: string[];
+    /** 就诊次数 */
+    times: number;
 }
+
 /**
  * @description 数据库类型
  * @param customer 患者姓名
@@ -245,19 +254,20 @@ declare interface DataType extends common {
  * @param prescriptionDrug 处方药
  */
 declare interface Info extends common {
-  /**  患病标签 */
-  tags: string;
-  /** 患病原因 */
-  cause: string;
-  /** 患者id */
-  customerId: string;
-  /** 科室 */
-  depart: string;
-  /** 省份 */
-  province: string;
-  /** 就诊次数 */
-  times: number;
+    /**  患病标签 */
+    tags: string;
+    /** 患病原因 */
+    cause: string;
+    /** 患者id */
+    customerId: string;
+    /** 科室 */
+    depart: string;
+    /** 省份 */
+    province: string;
+    /** 就诊次数 */
+    times: number;
 }
+
 /**
  * @param key 唯一标识
  * @param customer 患者姓名
@@ -270,10 +280,51 @@ declare interface Info extends common {
  * @param prescriptionDrug 处方药
  */
 declare interface badDataType extends common {
-  /** 唯一标识 */
-  key: string;
-  /** 患病标签 */
-  tags: string[];
-  /** 不良原因 */
-  cause: string;
+    /** 唯一标识 */
+    key: string;
+    /** 患病标签 */
+    tags: string[];
+    /** 不良原因 */
+    cause: string;
+}
+
+declare interface Addition {
+    hospitalName: String;
+    hospitalId: String;
+    additionDate: String;
+    hospitalLevel: String;
+    province: String;
+    position: String;
+    infoJsonPath: String;
+}
+
+declare interface Content {
+
+    key: string,
+    title: String,
+    paragraph: String[]
+
+}
+
+declare interface Depart {
+    title: string,
+    content: Content[]
+
+}
+
+declare interface detail extends depart {
+    key: String,
+    title: String,
+    paragraph: String[],
+    depart: Depart[]
+}
+declare interface User {
+    username: String,
+    password: String,
+    avatarPath: String,
+    hospitalId: String,
+    depart: String,
+    name:String,
+    userId:String,
+    sciencePath:String
 }

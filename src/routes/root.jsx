@@ -22,7 +22,7 @@ export default  [
   },
   {
     path: '/',
-    element: <Navigate to='/patient' />,
+    element: <Navigate to='/chat' />,
   },
   {
      path: '/chat',
@@ -63,7 +63,7 @@ export default  [
         element: <Customer />,
       }, 
       {
-         path: '',
+         path: ':hospitalName',
         element:<Empty style={{minHeight:'500px'}} />
       }, 
       {

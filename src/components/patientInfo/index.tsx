@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
 import { Layout, Flex, Switch, Divider, Menu, Breadcrumb, Space, Avatar, Modal, Upload, message, Form, Input } from "antd";
 import type { UploadProps } from 'antd';
 import { headerStyle, contentStyle, siderStyle, footerStyle, layoutStyle, tag, avatar, flex, menu, } from "./css";
@@ -13,10 +13,11 @@ const getItem = (label: React.ReactNode, key?: React.Key | null, icon?: React.Re
   ({ key, icon, children, label, } as MenuItem)
 const { Dragger } = Upload;
 const App: React.FC = () => {
+  console.log(useParams());
   const [show, setShow] = useState(false)
   // 事件触发器
   const dispatch = useAppDispatch()
-  const picturePath = useAppSelector(state => state.login.status.picturePath)
+  const picturePath = useAppSelector(state => state.login.status.avatarPath)
   const user = { ...useAppSelector(state => state.login) }
   // 上传文件
   const props: UploadProps = {

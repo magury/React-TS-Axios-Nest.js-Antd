@@ -49,7 +49,7 @@ const App: React.FC = () => {
         <Space direction="vertical" size={16}>
           <Card
             title="欢迎登录"
-            extra={<a href="#">游客登录</a>}
+            extra={<a className="a_color">游客登录</a>}
             style={{
               width: 500, marginLeft: 100, marginTop: 200, height: 350, border: "1px solid black", boxShadow: "5px 5px 5px black",
             }}

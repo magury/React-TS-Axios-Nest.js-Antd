@@ -7,7 +7,6 @@ interface Props {
   };
 }
 const App: React.FC<Props> = (props) => {
-  console.log(props);
   return (
     <Fragment>
       <span>{props?.title?.item1}</span>

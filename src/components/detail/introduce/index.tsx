@@ -1,41 +1,28 @@
-import React from "react";
-import { Divider, Typography } from "antd";
+import React, {useEffect, useState} from "react";
+import {Divider, Typography} from "antd";
+import {useAppSelector} from "@/store/hooks";
+import {getHospitalJson} from "@/utils/http";
+import {useLocation} from "react-router-dom";
 
-const { Title, Paragraph, Text, Link } = Typography;
+const {Title, Paragraph, Text, Link} = Typography;
 
 const blockContent = `AntV 是蚂蚁集团全新一代数据可视化解决方案，致力于提供一套简单方便、专业可靠、不限可能的数据可视化最佳实践。得益于丰富的业务场景和用户需求挑战，AntV 经历多年积累与不断打磨，已支撑整个阿里集团内外 20000+ 业务系统，通过了日均千万级 UV 产品的严苛考验。
 我们正在基础图表，图分析，图编辑，地理空间可视化，智能可视化等各个可视化的领域耕耘，欢迎同路人一起前行。`;
 
-const App: React.FC = () => (
-  <Typography>
-    <Title>
-      <Text mark>乐山市第一人民医院</Text>
-    </Title>
+const App: React.FC = () => {
+    let {state: {title, paragraph}}: { state: { title: string, paragraph: string[] } } = useLocation();
 
-    <Paragraph code={true} style={{ textAlign: "left" }}>
-      乐山市人民医院位于世界自然文化遗产乐山大佛隔江相望的白塔山上，前身为加拿大联合教会医生启尔德博士创建的“嘉定福音医院”“仁济医院”，始建于1894年。1952年，人民政府将“仁济医院”与1942年国民政府建立的“公立乐山中心卫生院”合并为“乐山专区医院”。1985年，随地改市更名为“乐山市人民医院”。医院本部位于市中区白塔街，另有高新区惠安路639号高新院区和瓦厂坝永安院区（乐山市肿瘤中心、感染性疾病科）。
-    </Paragraph>
-    <Paragraph code={true} style={{ textAlign: "left" }}>
-      风雨溯老院，沧桑慨百年。医院秉承“仁爱济世、精诚行医”的办院宗旨和“团结、奋进、务实、创新”的精神，为区域内民众除病疗疾。医院专业门类和科室设置齐备，技术力量雄厚，是乐山市医教研防保中心。2009年通过国家“三甲”综合医院评审。{" "}
-    </Paragraph>
-    <Paragraph code={true} style={{ textAlign: "left" }}>
-      医院现有人员2247人，卫生专业技术人员2022人，其中：卫生高级职称265人、卫生中级职称943人。博士硕士351人。享受国务院特殊津贴专家3人，全国五一劳动奖章2人；四川省有突出贡献的优秀专家2人，四川省五一劳动奖章5人，四川省优秀共产党员3人，四川省学术技术带头人后备人选3人，四川省卫生健康委学术技术带头人6人，四川省名中医5人；乐山市学术技术带头人27人；硕士研究生导师10人。{" "}
-    </Paragraph>
-    <Paragraph code={true} style={{ textAlign: "left" }}>
-      医院占地面积189.26亩，其中，医院本部148.11亩、城北病区4.66亩、永安院区36.49亩。拥有具备IGRT精准放射治疗LA、3.0T
-      MRI、256排CT、车载CT、DSA、全飞秒近视激光治疗仪、海扶刀、ECMO等大中型现代化医疗设备。编制床位1800张，开放床位1800张，年门诊人次179余万，出院病人近8余万，手术台次5余万。{" "}
-    </Paragraph>
-    <Paragraph code={true} style={{ textAlign: "left" }}>
-      目前医院开展的诊疗科目共28大类102个专业。每年均有数十项新技术临床应用。其中，开展国家、省级限制类医疗技术5项。出院患者手术占比约50%，四级手术占比约20%。非体外循环心脏不停跳多支冠脉搭桥术、颅内外（脑）血管搭桥手术、破裂腹主动脉瘤的开放和腔内修复术、胸主动脉夹层腔内修复术、双微创手术治疗先天性白内障、岩斜区占位切除术达省级先进水平。微创手术占比约22%。其中，腔镜化、内镜化技术广泛应用于内、外、妇、儿各大专业，胸腹腔镜肿瘤根治、病变切除及重建术式发展成熟。介入治疗覆盖心、脑血管、外周血管、肝胆等专业疾病，经导管主动脉瓣置换术（TAVR）、左心耳封堵术、复杂冠脉介入支架技术、颅内外血管狭窄或闭塞介入、急性脑梗塞介入再通等技术更是挺进西南地区先进医疗技术行列。在外科加速康复理念基础上，推行新型诊疗模式，开展日间医疗服务。医院现有省级医学重点专科15个、省级临床重点专科4个（在建）、市级医学重点学科31个、市级临床重点专科10个（在建）、市质量控制中心47个。{" "}
-    </Paragraph>
-    <Paragraph code={true} style={{ textAlign: "left" }}>
-      医院是国家卫生健康委确定的国际紧急救援中心网络医院，是国家级住院医师规范化培训基地、四川省专科医师规范化培训基地、四川省全科医师培训基地、四川省护士规范化培训基地、中华医学会临床药学分会临床药师规范化培训学员培训中心、中国医师协会腹腔镜外科医师培训基地、国家卫生健康委人才交流服务中心普外内镜医师培训基地；是国家卒中中心、胸痛中心、心衰中心、房颤中心、危重孕产妇、新生儿救治中心，全国肺栓塞和深静脉血栓形成防治能力建设项目血栓防治中心优秀单位；是西南医科大学非直属附属医院和多所医学院校的教学医院；是乐山市首批互联网医院。{" "}
-    </Paragraph>
-    <Paragraph code={true} style={{ textAlign: "left" }}>
-      近年来，医院不断强化内部管理，深化医院绩效改革，响应分级诊疗，与111家省、市、区县、乡镇医院签订各类医联体合作协议。先后被评为全国卫生系统先进集体、国家卫生计生委芦山地震抗震救灾先进集体、四川省文明单位、四川省先进基层党组织、四川省脱贫攻坚“五个一”帮扶先进集体、四川省抗击新冠肺炎疫情先进集体、四川省援外医疗工作先进集体、四川省脱贫攻坚先进集体、省直部门（单位）定点扶贫先进集体等。{" "}
-    </Paragraph>
-    <Divider />
-  </Typography>
-);
+    return <Typography>
+        <Title>
+            <Text mark>{title}</Text>
+        </Title>
+        {
+            paragraph.map((item, index) => (
+                <Paragraph  editable={false} key={item} children={item} code={true} style={{textAlign: "left"}}/>
+            ))
+        }
+        <Divider/>
+    </Typography>
+}
 
 export default App;

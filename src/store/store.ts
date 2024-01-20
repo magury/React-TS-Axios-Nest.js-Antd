@@ -1,10 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 // ...
 import LoginReducer from "@/features/login/loginSlice";
+import HospitalReducer from '@/features/hospital/hospitalSlice'
+
 const store = configureStore({
-  reducer: {
-    login: LoginReducer,
-  },
+    reducer: {
+        login: LoginReducer,
+        hospital: HospitalReducer
+    },
 });
 export default store;
 // 从 store 本身推断出 `RootState` 和 `AppDispatch` 类型

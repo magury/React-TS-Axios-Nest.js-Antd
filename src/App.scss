@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 .bg {
   width: 100%;
   height: 700px;
@@ -76,13 +79,13 @@
       }
     }
   }
-  .card {
+  .myCard {
     display: flex;
     flex-direction: row;
     width: 90%;
     // justify-content: space-around;
     flex-wrap: wrap;
-    border-width: 0px;
+    border-width:0;
     .ant-card {
       width: fit-content;
       background: #fffff1;
@@ -91,9 +94,6 @@
       color: #a45555;
       margin-bottom: 10px;
     }
-  }
-  #card {
-    justify-content: center;
   }
   .pop {
     & > span {
@@ -194,7 +194,10 @@
 }
 .popular {
   & > .flex {
-    & > .card {
+    display: flex;
+    flex-direction: row;
+
+    & > .card, & > .myCard {
       div {
         user-select: none;
       }
@@ -259,4 +262,10 @@
 .upload {
   display: flex;
   flex-direction: row;
+}
+.noSelect{
+  -moz-user-select:none;		/* 火狐 */
+  -webkit-user-select:none;	/* 谷歌 */
+  -ms-user-select:none;		/* IE */
+  user-select:none;
 }
