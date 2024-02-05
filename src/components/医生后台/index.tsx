@@ -63,7 +63,7 @@ const App: React.FC = () => {
     accept: "image/*",
     name: "file",
     multiple: true,
-    action: `http://localhost:3011/upload?username=${user.username}&password=${user.password}`,
+    action: `http://134.175.81.248:5000/upload?username=${user.username}&password=${user.password}`,
     onChange(info) {
       setShow(true);
       const { status } = info.file;
